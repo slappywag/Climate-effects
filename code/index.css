@@ -103,7 +103,7 @@ ui-range-input {
 	width: 200%;
 	top: 50%;
 	left: -50%;
-	filter: drop-shadow(0 0 var(--atmos-size) #71c1ff);
+	filter: drop-shadow(0 0 calc(var(--atmos-size)*-1) #71c1ff);
 }
 
 .sun {
