@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="./index.js" defer></script>
+<link rel="stylesheet" href="./index.css">
+<title>Climate Model</title>
+	
+<article class="app">
+	<div class="scene">
+		<div class="earth">
+			<img src="./images/earth.png" alt="">
+		</div>
+		<div class="sun"></div>
+		<!-- arrows -->
+		<div class="arrows">
+			<svg class="arrow-flux" viewBox="0 0 300 500" version="1.1" xmlns="http://www.w3.org/2000/svg">
+				<defs>
+					<linearGradient id="arrow-gradient" gradientUnits="objectBoundingBox" x1="50%" y1="0%" x2="50%" y2="100%">
+      				<stop offset="0%" stop-color="#facd56" />
+						<stop offset="100%" stop-color="#facd5600" />
+					</linearGradient>
+				</defs>
+				<polygon points="150,0 300,200 200,200 200,500 100,500 100,200 0,200" style="fill:url('#arrow-gradient');stroke:none"/>
+			</svg>
+			<svg class="arrow-albedo" viewBox="0 0 300 500" version="1.1" xmlns="http://www.w3.org/2000/svg">
+				<polygon points="150,0 300,200 200,200 200,500 100,500 100,200 0,200" style="fill:url('#arrow-gradient');stroke:none"/>
+			</svg>
+			<svg class="arrow-infrared" viewBox="0 0 300 500" version="1.1" xmlns="http://www.w3.org/2000/svg">
+				<polygon points="150,0 300,200 200,200 200,500 100,500 100,200 0,200" style="fill:url('#arrow-gradient');stroke:none"/>
+			</svg>
+		</div>
+		<!-- <div class="atmosphere"></div> -->
+	</div>
+	<div class="sliders-wrap">
+		<div class="surface-temp">
+			<p>Earth’s average surface temperature: <span id="surfaceTemp"></span></p>
+		</div>
+		<ui-range-input
+			id="solar-flux"
+			min="0"
+			max="100"
+			step="1"
+			value="100"
+			output-suffix="%"
+			label="Energy from sun">
+		</ui-range-input>
+		<ui-range-input
+			class="d-none"
+			id="visible-transimittance"
+			min="0"
+			max="100"
+			step="1"
+			value="80"
+			output-suffix="%"
+			label="Visible transmittance">
+		</ui-range-input>
+		<ui-range-input
+			id="infrared-transimittance"
+			min="0"
+			max="100"
+			step="1"
+			value="10"
+			output-suffix="%"
+			label="Energy emmitted from earth">
+		</ui-range-input>
+		<ui-range-input
+			id="albedo"
+			min="0"
+			max="100"
+			step="1"
+			value="30"
+			output-suffix="%"
+			label="Earths reflectivity">
+		</ui-range-input>
+	</div>
+</article>
+
+</html>

@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600&display=swap');
+
+:root {
+
+	/* Primary */
+	--primary-50: #e9ddfe;
+	--primary-100: #d2bbfd;
+	--primary-500: #8f55fa;
+	--primary-600: #7244c8;
+	--primary-700: #563396;
+	--primary-800: #392264;
+	--primary-900: #1d1132;
+
+	/* Shadows */
+	--shadow-lvl-1: 0px 2px 2px 0 rgba(0, 0, 0, .25);
+	--shadow-lvl-2: 0px 2px 6px 1px rgba(0, 0, 0, .35);
+
+	/* focus styles */
+	--focus-color: rgb(29, 86, 255);
+}
+
+.d-none {
+	display: none;
+}
+
+html {
+	font-family: 'Sora', sans-serif;
+}
+
+body, html {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	width: 100%;
+	height: 100vh;
+	overflow: hidden;
+	background: linear-gradient(to bottom, #000104, #010c1d);
+}
+
+* {
+	box-sizing: border-box;
+}
+
+article,
+.scene {
+	color: white;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	outline: 1px solid pink;
+}
+
+.sliders-wrap {
+	position: absolute;
+	width: fit-content;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	background-color: #080707;
+	padding: 30px;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	gap: 20px;
+	margin: 20px auto;
+	border-radius: 40px;
+	box-shadow: var(--shadow-lvl-2);
+}
+.surface-temp {
+	width: 100%;
+	text-align: center;
+	font-weight: 600;
+	font-size: 1.5rem;
+	color: var(--primary-100);
+	color: #facd56;
+}
+.surface-temp p {
+	margin: 8px 0;
+}
+ui-range-input {
+	width: 250px;
+}
+#infrared-transimittance {
+	width: 330px;
+}
+
+.scene p {
+	margin: 0;
+}
+
+.earth {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	--atmos-size: 100px;
+}
+
+.earth img {
+	position: absolute;
+	width: 200%;
+	top: 50%;
+	left: -50%;
+	filter: drop-shadow(0 0 var(--atmos-size) #71c1ff);
+}
+
+.sun {
+	position: absolute;
+	bottom: 90%;
+	left: 50%;
+	width: 400vw;
+	height: 400vw;
+	border-radius: 50%;
+	transform: translateX(-50%);
+	background: radial-gradient(circle at center,
+		hsl(calc(20 + 20 * var(--sun-strength)), 100%, calc(60% + 40% * var(--sun-strength))),
+		hsl(calc(40 + 20 * var(--sun-strength)), 100%, calc(40% + 30% * var(--sun-strength))));
+	box-shadow: 0 0 calc(var(--sun-strength) * 200px) 0 hsla(52, 100%, 84%, 0.8);
+}
+
+/* 
+	Arrows
+*/
+
+.arrows {
+	position: absolute;
+	width: 100%;
+	height: 40%;
+	top: 10%;
+	display: flex;
+	justify-content: center;
+}
+
+[class|='arrow'] {
+	width: 150px;
+	transform-origin: bottom center;
+	--arrow-scale: 1;
+	color: #facd56;
+	z-index: 2;
+}
+
+.arrow-flux {
+	align-self: flex-start;
+	transform: translateY(-100%) rotate(175deg) scale(var(--arrow-scale));
+}
+
+.arrow-albedo {
+	align-self: flex-end;
+	transform: rotate(5deg) scale(var(--arrow-scale));
+}
+
+.arrow-infrared {
+	align-self: flex-end;
+	transform: rotate(5deg) scale(var(--arrow-scale));
+}

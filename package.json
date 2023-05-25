@@ -1,0 +1,12 @@
+{
+    "name": "climate-model",
+    "author": "Peter Norton",
+	 "private": true,
+    "scripts": {
+        "build": "esninja --prod --srcdir=./code --outdir=./dist --cpyext .svg .json .html .png",
+			"serve": "esninja --dev --srcdir=./code --outdir=./dist"
+    },
+    "devDependencies": {
+        "esninja": "^1"
+    }
+}
