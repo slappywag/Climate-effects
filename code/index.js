@@ -35,7 +35,7 @@ function updateScene() {
 	document.querySelector('.arrow-albedo').style.setProperty('--arrow-scale', sliders.A.value / 100);
 	document.querySelector('.arrow-infrared').style.setProperty('--arrow-scale', sliders.tIR.value / 100);
 
-	document.querySelector('.earth').style.setProperty('--atmos-size', 1 - (sliders.tIR.value / 100));
+	document.querySelector('.earth').style.setProperty('--atmos-size', 0.99 + (sliders.tIR.value / 2000));
 	document.querySelector('.sun').style.setProperty('--sun-strength', sliders.S.value / 100);
 	document.querySelector('.earth').style.setProperty('--albedo-effect', (sliders.A.value / 100));
 

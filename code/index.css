@@ -49,22 +49,24 @@ article,
 	position: relative;
 	width: 100%;
 	height: 100%;
-	outline: 1px solid pink;
+}
+
+article {
+	display: grid;
+	grid-template-rows: auto min-content;
+	max-width: 1400px;
+	overflow: hidden;
+	margin: 0 auto;
 }
 
 .sliders-wrap {
-	position: absolute;
-	width: fit-content;
+	position: relative;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
 	background-color: #080707;
 	padding: 30px;
-	bottom: 0;
-	left: 50%;
-	transform: translateX(-50%);
 	gap: 20px;
-	margin: 20px auto;
 	border-radius: 40px;
 	box-shadow: var(--shadow-lvl-2);
 }
@@ -82,9 +84,8 @@ article,
 ui-range-input {
 	width: 250px;
 }
-#infrared-transimittance {
-	width: 330px;
-}
+
+
 
 .scene p {
 	margin: 0;
@@ -97,20 +98,43 @@ ui-range-input {
 	overflow: hidden;
 }
 
+.earth-wrap {
+	position: absolute;
+	width: 400%;
+	left: -175%;
+	top: 55%;
+}
+
+.atmosphere {
+	position: absolute;
+	width: 100%;
+	border-radius: 50%;
+	aspect-ratio: 1 / 1;
+	background: radial-gradient(circle at center,
+				#aacce2 50%, rgba(170, 204, 226, 0.5) 70%);
+	transform-origin: center;
+	transform: scale(var(--atmos-size));
+	filter: drop-shadow(0 0 calc(var(--atmos-size) * 10rem) #aacce2);
+}
+
 .earth img {
 	position: absolute;
-	width: 200%;
-	top: 50%;
-	left: -50%;
-	filter: drop-shadow(0 0 calc(var(--atmos-size)*50px) #71c1ff);
+	width: 100%;
+	/* filter: blur(2px); */
+}
+
+.cloudy {
+	opacity: var(--albedo-effect);
+	filter: brightness(120%) blur(2px);
+	/* mix-blend-mode: soft-light; */
 }
 
 .sun {
 	position: absolute;
 	bottom: 90%;
 	left: 50%;
-	width: 400vw;
-	height: 400vw;
+	width: 600vw;
+	height: 600vw;
 	border-radius: 50%;
 	transform: translateX(-50%);
 	background: radial-gradient(circle at center,
