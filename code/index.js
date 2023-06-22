@@ -22,6 +22,9 @@ Object.keys(sliders).forEach(key => {
 	sliders[key].addEventListener('input', e => updateScene());
 });
 
+
+const thermometerMercury = document.getElementById('mercury');
+
 function updateScene() {
 	// update temp
 	const Temp = calc_T(
@@ -39,7 +42,10 @@ function updateScene() {
 	document.querySelector('.sun').style.setProperty('--sun-strength', sliders.S.value / 100);
 	document.querySelector('.earth').style.setProperty('--albedo-effect', (sliders.A.value / 100));
 
-	// update scene
+	// update thermometer
+	const tempRange = 400;
+	const yRange = (110 * ((1 / tempRange) * +Temp.Kelvin));
+	thermometerMercury.style.transform = `translate(0, ${yRange * -1}px)`
 	surfaceTemp.textContent = Temp.Celius + '°C';
 }
 
@@ -52,7 +58,7 @@ function calc_T(S = 1370, A = 0.3, tVIS = 0.8, tIR = 0.1) {
 	const T = Math.pow((FS * (1 - A)) * (1 + tVIS) / (sigma * (1 + tIR)), 0.25);
 	// in degrees
 	const T_degrees = (T - 273.15).toFixed(1);
-	// outpur
+	// output
 	return {
 		Kelvin: T,
 		Celius: T_degrees
