@@ -9,7 +9,11 @@
 <article class="app">
 	<div class="scene">
 		<div class="earth">
-			<img src="./images/earth.png" alt="">
+			<div class="earth-wrap">
+				<div class="atmosphere"></div>
+				<img src="./images/earth_cropped.png" alt="">
+				<img class="cloudy" src="./images/earth_white.png" alt="">
+			</div>
 		</div>
 		<div class="sun"></div>
 		<!-- arrows -->
@@ -43,7 +47,7 @@
 			step="1"
 			value="100"
 			output-suffix="%"
-			label="Energy from sun">
+			label="Energy from the Sun">
 		</ui-range-input>
 		<ui-range-input
 			class="d-none"
@@ -62,7 +66,7 @@
 			step="1"
 			value="10"
 			output-suffix="%"
-			label="Energy emmitted from earth">
+			label="Greenhouse gases">
 		</ui-range-input>
 		<ui-range-input
 			id="albedo"
@@ -71,7 +75,7 @@
 			step="1"
 			value="30"
 			output-suffix="%"
-			label="Earths reflectivity">
+			label="Earth's reflectivity">
 		</ui-range-input>
 	</div>
 </article>
