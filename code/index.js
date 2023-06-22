@@ -8,6 +8,20 @@ const sigma = 5.670374419e-8;
 // ELEMENTS
 
 const surfaceTemp = document.getElementById('surfaceTemp');
+const resetButton = document.getElementById('reset');
+
+// RESET
+const defaults = {
+	S: 100,
+	A: 30,
+	tVIS: 80,
+	tIR: 10
+};
+resetButton.addEventListener('click', () => {
+	Object.keys(sliders).forEach(key => {
+		sliders[key].value = defaults[key]
+	});
+});
 
 // SLIDERS
 

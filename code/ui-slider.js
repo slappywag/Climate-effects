@@ -24,7 +24,7 @@ const TEMPLATE = `
 			--fill-background: var(--primary-100);
 			--fill-radius: 20px;
 			--track-height: calc(var(--thumb-size) / 4);
-			--thumb-size: 22px;
+			--thumb-size: 28px;
 			--thumb-color: var(--primary-600);
 			--thumb-hover-color: var(--primary-500);
 			--thumb-shadow: none;
