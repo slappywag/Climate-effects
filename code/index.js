@@ -9,6 +9,25 @@ const sigma = 5.670374419e-8;
 
 const surfaceTemp = document.getElementById('surfaceTemp');
 const resetButton = document.getElementById('reset');
+const dialog = document.getElementById('dialog');
+
+// const dialogOpen = document.getElementById('dialog-btn');
+// const sunInfo = document.getElementById('sun-info');
+// const greenhouseInfo = document.getElementById('greenhouse-info');
+// const reflectivityInfo = document.getElementById('reflectivity-info');
+
+['sun-info', 'greenhouse-info', 'reflectivity-info'].forEach(id => {
+	const el = document.getElementById(id);
+	const cls = id.split('-')[0];
+	el.addEventListener('click', () => {
+		dialog.className = 'show-' + cls;
+		dialog.showModal();
+	});
+});
+
+// dialogOpen.addEventListener("click", () => {
+// 	dialog.showModal();
+// });
 
 // RESET
 const defaults = {
@@ -21,6 +40,7 @@ resetButton.addEventListener('click', () => {
 	Object.keys(sliders).forEach(key => {
 		sliders[key].value = defaults[key]
 	});
+	updateScene();
 });
 
 // SLIDERS
@@ -52,7 +72,7 @@ function updateScene() {
 	document.querySelector('.arrow-albedo').style.setProperty('--arrow-scale', sliders.A.value / 100);
 	document.querySelector('.arrow-infrared').style.setProperty('--arrow-scale', sliders.tIR.value / 100);
 
-	document.querySelector('.earth').style.setProperty('--atmos-size', 0.99 + (sliders.tIR.value / 2000));
+	document.querySelector('.earth').style.setProperty('--atmos-size', 1 + (sliders.tIR.value / 2000));
 	document.querySelector('.sun').style.setProperty('--sun-strength', sliders.S.value / 100);
 	document.querySelector('.earth').style.setProperty('--albedo-effect', (sliders.A.value / 100));
 
