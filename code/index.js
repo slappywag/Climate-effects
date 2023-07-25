@@ -11,11 +11,6 @@ const surfaceTemp = document.getElementById('surfaceTemp');
 const resetButton = document.getElementById('reset');
 const dialog = document.getElementById('dialog');
 
-// const dialogOpen = document.getElementById('dialog-btn');
-// const sunInfo = document.getElementById('sun-info');
-// const greenhouseInfo = document.getElementById('greenhouse-info');
-// const reflectivityInfo = document.getElementById('reflectivity-info');
-
 ['sun-info', 'greenhouse-info', 'reflectivity-info'].forEach(id => {
 	const el = document.getElementById(id);
 	const cls = id.split('-')[0];
@@ -24,10 +19,6 @@ const dialog = document.getElementById('dialog');
 		dialog.showModal();
 	});
 });
-
-// dialogOpen.addEventListener("click", () => {
-// 	dialog.showModal();
-// });
 
 // RESET
 const defaults = {

@@ -10,14 +10,42 @@
 <link href="https://fonts.googleapis.com/css2?family=Short+Stack&display=swap" rel="stylesheet">
 
 <title>Climate Model</title>
+
+<dialog id="dialog">
+	<div class="sun-dialog">
+		<h2>Energy from the Sun</h2>
+		<p>
+			The energy from the Sun is represented by the yellow arrow. The current energy from the Sun could
+			increase by 10% because <a href="https://spaceplace.nasa.gov/solar-activity/en/">activity on the Sun's surface</a> changes during its 11 year <a href="https://spaceplace.nasa.gov/solar-cycles/en/">cycle</a> the . During the last ice age, the energy from the Sun was at about 90% of today's level. What does the model predict that the Earth's average surface temperature would be if there was no energy from the Sun (0%)?
+		</p>
+	</div>
+	<div class="greenhouse-dialog">
+		<h2>Greenhouse gases</h2>
+		<p>
+			Greenhouse gases in our atmosphere let the energy from the Sun reach Earth. This is represented by the yellow arrow on the model. The energy from the Sun warms the Earth and then Earth radiates heat (think about how you can feel the heat from a radiator!). However, greenhouse gases prevent the heat radiated by the Earth leaving the atmosphere- they trap it like a blanket. Carbon dioxide, water vapour and methane are <a href="https://climatekids.nasa.gov/greenhouse-cards/">greenhouse gases</a>. The energy radiating from the Earth and being trapped by the greenhouse gases is represented by the orange arrows on the model.
+		</p>
+	</div>
+	<div class="reflectivity-dialog">
+		<h2>Earth's reflectivity</h2>
+		<p>	
+			Some of the energy from the Sun does not reach the Earth's surface and warm it up but is reflected
+			back into space. Bright white surfaces like snow, ice and clouds are good at reflecting sunlight. Dark surfaces like the ocean reflect less sunlight and the energy is absorbed by the Earth and warms it up.
+		</p>
+	</div>
+	<form method="dialog">
+		<button>OK</button>
+	</form>
+</dialog>
 	
 <article class="app">
 	<div class="scene">
 		<div class="earth">
 			<div class="earth-wrap">
-				<div class="atmosphere"></div>
-				<img src="./images/earth_vector_color.svg" alt="">
-				<img class="cloudy" src="./images/earth_vector_white.svg" alt="">
+				<div class="greenhouse-gasses"></div>
+				<div class="earth-svg">
+					<img src="./images/earth_vector_3.svg" alt="">
+					<!-- <div class="shadow"></div> -->
+				</div>
 			</div>
 		</div>
 		<div class="sun"></div>
@@ -66,43 +94,84 @@
 		</div>
 	</div>
 	<div class="sliders-wrap">		
-		<ui-range-input
-			id="solar-flux"
-			min="0"
-			max="110"
-			step="1"
-			value="100"
-			output-suffix="%"
-			label="Energy from the Sun">
-		</ui-range-input>
-		<ui-range-input
-			class="d-none"
-			id="visible-transimittance"
-			min="0"
-			max="100"
-			step="1"
-			value="80"
-			output-suffix="%"
-			label="Visible transmittance">
-		</ui-range-input>
-		<ui-range-input
-			id="infrared-transimittance"
-			min="0"
-			max="100"
-			step="1"
-			value="10"
-			output-suffix="%"
-			label="Greenhouse gases">
-		</ui-range-input>
-		<ui-range-input
-			id="albedo"
-			min="0"
-			max="100"
-			step="1"
-			value="30"
-			output-suffix="%"
-			label="Earth's reflectivity">
-		</ui-range-input>
+		<div>
+			<ui-range-input
+				show-output=false
+				id="solar-flux"
+				min="0"
+				max="110"
+				step="1"
+				value="100"
+				output-suffix="%"
+				label="Energy from the Sun">
+			</ui-range-input>
+			<div class="slider-labels" aria-hidden="true">
+				<p>0%</p>
+				<p>110%</p>
+			</div>
+			<button id="sun-info" aria-haspopup="dialog" class="more-info">
+				?
+				<span class="sr-only">
+					Learn more about energy from the sun
+				</span>
+			</button>
+		</div>
+		<div class="d-none">
+			<ui-range-input
+				show-output=false
+				id="visible-transimittance"
+				min="0"
+				max="100"
+				step="1"
+				value="80"
+				output-suffix="%"
+				label="Visible transmittance">
+			</ui-range-input>
+		</div>
+		<div>
+			<ui-range-input
+				show-output=false
+				id="infrared-transimittance"
+				min="0"
+				max="100"
+				step="1"
+				value="10"
+				output-suffix="%"
+				label="Greenhouse gases">
+			</ui-range-input>
+			<div class="slider-labels" aria-hidden="true">
+				<p>None</p>
+				<p>Lots</p>
+			</div>
+			<button id="greenhouse-info" aria-haspopup="dialog" class="more-info">
+				?
+				<span class="sr-only">
+					Learn more about greenhouse gases
+				</span>
+			</button>
+		</div>
+		<div>
+			<ui-range-input
+				show-output=false
+				id="albedo"
+				min="0"
+				max="100"
+				step="1"
+				value="30"
+				output-suffix="%"
+				label="Earth's reflectivity">
+			</ui-range-input>
+			<div class="slider-labels" aria-hidden="true">
+				<p>0%</p>
+				<p>100%</p>
+			</div>
+			<button id="reflectivity-info" aria-haspopup="dialog" class="more-info">
+				?
+				<span class="sr-only">
+					Learn more about the earths reflectivity
+				</span>
+			</button>
+		</div>
 		<button id="reset" class="reset">
 			Reset to current values
 		</button>
