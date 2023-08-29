@@ -15,21 +15,28 @@
 	<div class="sun-dialog">
 		<h2>Energy from the Sun</h2>
 		<p>
-			The energy from the Sun is represented by the yellow arrow. The current energy from the Sun could
-			increase by 10% because <a href="https://spaceplace.nasa.gov/solar-activity/en/">activity on the Sun's surface</a> changes during its 11 year <a href="https://spaceplace.nasa.gov/solar-cycles/en/">cycle</a> the . During the last ice age, the energy from the Sun was at about 90% of today's level. What does the model predict that the Earth's average surface temperature would be if there was no energy from the Sun (0%)?
+			The energy from the Sun varies over time due to activity on the Sun's surface. Also, slight shifts in the tilt of the
+			Earth and the shape of its orbit around the Sun affects the amount of the Sun's energy that reaches the surface of the
+			Earth. Within decades, the energy could change by 1%, but over thousands of years the variations could be larger.
+			What does the model predict the Earth's average temperature would be if there was no energy from the Sun (0%)?
 		</p>
 	</div>
 	<div class="greenhouse-dialog">
 		<h2>Greenhouse gases</h2>
 		<p>
-			Greenhouse gases in our atmosphere let the energy from the Sun reach Earth. This is represented by the yellow arrow on the model. The energy from the Sun warms the Earth and then Earth radiates heat (think about how you can feel the heat from a radiator!). However, greenhouse gases prevent the heat radiated by the Earth leaving the atmosphere- they trap it like a blanket. Carbon dioxide, water vapour and methane are <a href="https://climatekids.nasa.gov/greenhouse-cards/">greenhouse gases</a>. The energy radiating from the Earth and being trapped by the greenhouse gases is represented by the orange arrows on the model.
+			Energy from the Sun warms the Earth. As the Earth's temperature increases, more heat is radiated back into space
+			(represented by the orange arrows on the model). Greenhouse gases (like carbon dioxide, water and methane) trap heat
+			radiated from the Earth. Some of this heat is directed back to the Earth’s surface and as a result the surface
+			temperature of the Earth increases. What does the model predict the Earth's temperature would be if there were no Greenhouse gases?
 		</p>
 	</div>
 	<div class="reflectivity-dialog">
 		<h2>Earth's reflectivity</h2>
 		<p>	
-			Some of the energy from the Sun does not reach the Earth's surface and warm it up but is reflected
-			back into space. Bright white surfaces like snow, ice and clouds are good at reflecting sunlight. Dark surfaces like the ocean reflect less sunlight and the energy is absorbed by the Earth and warms it up.
+			Some of the energy from the Sun does not reach the Earth's surface and warm it up but is reflected back into space.
+			Bright white surfaces like snow, ice and clouds are good at reflecting sunlight. Dark surfaces like the ocean reflect
+			less sunlight and so more energy is absorbed by the Earth and warms it up.
+			What does the model predict will happen to the Earth's temperature if reflectivity decreases?
 		</p>
 	</div>
 	<form method="dialog">
@@ -39,34 +46,94 @@
 	
 <article class="app">
 	<div class="scene">
-		<div class="earth">
-			<div class="earth-wrap">
-				<div class="greenhouse-gasses"></div>
-				<div class="earth-svg">
-					<img src="./images/earth_vector_3.svg" alt="">
-					<!-- <div class="shadow"></div> -->
+
+		<div class="sun-group">
+			<div class="sun"></div>
+		</div>
+
+		<div class="arrows">
+			<div class="arrow-flux">
+				<div class="base"></div>
+				<div class="head"></div>
+			</div>
+		
+			<div class="arrow-grid">
+				<div class="arrow-albedo">
+					<div class="base"></div>
+					<div class="head"></div>
+				</div>
+				<div class="arrow-infrared">
+					<div class="base"></div>
+					<div class="head"></div>
+				</div>
+				<div class="arrow-visible">
+					<div class="base"></div>
+					<div class="head"></div>
 				</div>
 			</div>
 		</div>
-		<div class="sun"></div>
-		<!-- arrows -->
-		<div class="arrows">
-			<svg class="arrow-flux" viewBox="0 0 300 500" version="1.1" xmlns="http://www.w3.org/2000/svg">
-				<defs>
-					<linearGradient id="arrow-gradient" gradientUnits="objectBoundingBox" x1="50%" y1="0%" x2="50%" y2="100%">
-      				<stop offset="0%" stop-color="#facd56" />
-						<stop offset="100%" stop-color="#facd5600" />
-					</linearGradient>
-				</defs>
-				<polygon points="150,0 300,200 200,200 200,500 100,500 100,200 0,200" style="fill:url('#arrow-gradient');stroke:none"/>
-			</svg>
-			<svg class="arrow-albedo" viewBox="0 0 300 500" version="1.1" xmlns="http://www.w3.org/2000/svg">
-				<polygon points="150,0 300,200 200,200 200,500 100,500 100,200 0,200" style="fill:url('#arrow-gradient');stroke:none"/>
-			</svg>
-			<svg class="arrow-infrared" viewBox="0 0 300 500" version="1.1" xmlns="http://www.w3.org/2000/svg">
-				<polygon points="150,0 300,200 200,200 200,500 100,500 100,200 0,200" style="fill:url('#arrow-gradient');stroke:none"/>
-			</svg>
+
+		<div class="earth-group">
+			<div class="atmosphere">
+				<div class="greenhouse">
+					<svg xmlns='http://www.w3.org/2000/svg'>
+						<defs>
+							<pattern id='a' patternUnits='userSpaceOnUse' width='50' height='50' patternTransform='scale(0.5) rotate(0)'>
+
+								<g class="gas_1" opacity="0">
+									<circle cx="34.4" cy="46.9" r="2" />
+									<circle cx="18.7" cy="23" r="2" />
+								</g>
+								<g class="gas_2" opacity="0">
+									<circle cx="11.2" cy="13.3" r="3" />
+									<circle cx="39" cy="21.7" r="2" />
+								</g>
+								<g class="gas_3" opacity="0">
+									<circle cx="12.3" cy="32.2" r="2" />
+									<circle cx="35.2" cy="37" r="3" />
+								</g>
+								<g class="gas_4" opacity="0">
+									<circle cx="45.4" cy="25.4" r="2" />
+									<circle cx="29.2" cy="19" r="3" />
+								</g>
+								<g class="gas_5" opacity="0">
+									<circle cx="24.5" cy="32.1" r="2" />
+									<circle cx="40" cy="5.6" r="3" />
+								</g>
+								<g class="gas_6" opacity="0">
+									<circle cx="4.8" cy="28.5" r="2" />
+									<circle cx="48.5" cy="49.8" r="3" />
+								</g>
+								<g class="gas_7" opacity="0">
+									<circle cx="1.8" cy="19.7" r="2" />
+									<circle cx="51.8" cy="19.7" r="2" />
+									<circle cx="7.2" cy="42.6" r="3" />
+								</g>
+								<g class="gas_8" opacity="0">
+									<circle cx="32.6" cy="28.8" r="2" />
+									<circle cx="31.8" cy="7.5" r="3" />
+								</g>
+								<g class="gas_9" opacity="0">
+									<circle cx="22.3" cy="12.2" r="2" />
+									<circle cx="46.8" cy="39.1" r="3" />
+									<circle cx="46.8" cy="30.8" r="2" />
+								</g>
+								<g class="gas_10" opacity="0">
+									<circle cx="22.9" cy="44.4" r="4" />
+									<circle cx="12.3" cy="52.6" r="3" />
+									<circle cx="12.3" cy="2.8" r="3" />
+									<circle cx="45.9" cy="13.1" r="4" />
+								</g>
+							</pattern>
+						</defs>
+						<rect width='100%' height='100%' transform='translate(0,0)' fill='url(#a)' />
+					</svg>
+				</div>
+			</div>
+			<div class="earth"></div>
 		</div>
+		
+		<!-- arrows -->
 		
 		<div class="surface-temp">
 			<svg class="thermometer-svg" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 85 160" role="img"
@@ -116,6 +183,7 @@
 				</span>
 			</button>
 		</div>
+		
 		<div class="d-none">
 			<ui-range-input
 				show-output=false
@@ -128,14 +196,15 @@
 				label="Visible transmittance">
 			</ui-range-input>
 		</div>
+		
 		<div>
 			<ui-range-input
 				show-output=false
 				id="infrared-transimittance"
-				min="0"
-				max="100"
-				step="1"
-				value="10"
+				min="-100"
+				max="0"
+				step="10"
+				value="-10"
 				output-suffix="%"
 				label="Greenhouse gases">
 			</ui-range-input>
@@ -150,6 +219,7 @@
 				</span>
 			</button>
 		</div>
+
 		<div>
 			<ui-range-input
 				show-output=false
@@ -170,7 +240,7 @@
 				<span class="sr-only">
 					Learn more about the earths reflectivity
 				</span>
-			</button>
+			</bu tton>
 		</div>
 		<button id="reset" class="reset">
 			Reset to current values
