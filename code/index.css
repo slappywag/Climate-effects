@@ -169,21 +169,19 @@ ui-range-input {
 	width: var(--size);
 	height: var(--size);
 	background-color: white;
+	filter: drop-shadow(0 0 10vh rgba(56, 56, 255, 0.526));
 }
 
-.earth::before {
-	content: '';
+.earth img {
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	background-image: url("./images/earth_vector_3.svg");
 	transform: rotate(10deg);
 	transform-origin: center;
 	border-radius: 50%;
 	overflow: hidden;
 	background-blend-mode: lighten;
 	opacity: calc( 1.1 - var(--albedo-effect));
-	filter: drop-shadow(0 0 10vh rgba(56, 56, 255, 0.526));
 }
 
 
