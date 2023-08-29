@@ -25,7 +25,7 @@ const defaults = {
 	S: 100,
 	A: 30,
 	tVIS: 80,
-	tIR: 10
+	tIR: -10
 };
 resetButton.addEventListener('click', () => {
 	Object.keys(sliders).forEach(key => {
@@ -51,21 +51,51 @@ Object.keys(sliders).forEach(key => {
 const thermometerMercury = document.getElementById('mercury');
 
 function updateScene() {
+
+	const tIR = Math.abs(sliders.tIR.value) * 0.01;
+
 	// update temp
 	const Temp = calc_T(
 		S_max * (sliders.S.value / 100),
 		sliders.A.value * 0.01,
 		sliders.tVIS.value * 0.01,
-		sliders.tIR.value * 0.01,
+		tIR
 	);
 
-	document.querySelector('.arrow-flux').style.setProperty('--arrow-scale', sliders.S.value / 100);
-	document.querySelector('.arrow-albedo').style.setProperty('--arrow-scale', sliders.A.value / 100);
-	document.querySelector('.arrow-infrared').style.setProperty('--arrow-scale', sliders.tIR.value / 100);
 
-	document.querySelector('.earth').style.setProperty('--atmos-size', 1 + (sliders.tIR.value / 2000));
-	document.querySelector('.sun').style.setProperty('--sun-strength', sliders.S.value / 100);
-	document.querySelector('.earth').style.setProperty('--albedo-effect', (sliders.A.value / 100));
+	// arrows
+		
+	const emitted = Math.max(sliders.A.value / 100, 0.1);
+	const escaped = emitted * tIR;
+	const trapped = emitted - escaped;
+
+	
+	document.querySelector('.arrow-flux').style.setProperty('--arrow-scale', sliders.S.value / 100);
+	document.querySelector('.arrow-flux').style.opacity = sliders.S.value > 0 ? 1 : 0;
+	
+	document.querySelector('.arrow-albedo').style.setProperty('--arrow-scale', emitted);
+	document.querySelector('.arrow-albedo').style.opacity = emitted > 0 ? 1 : 0;
+
+	// light that makes it into space
+	document.querySelector('.arrow-infrared').style.setProperty('--arrow-scale', escaped);
+	document.querySelector('.arrow-infrared').style.opacity = escaped > 0 ? 1 : 0;
+
+	// trapped light by greenhouse gases
+	document.querySelector('.arrow-visible').style.setProperty('--arrow-scale', trapped);
+	document.querySelector('.arrow-visible').style.opacity = trapped > 0 ? 1 : 0;
+
+	// 
+
+	const n = (1 - tIR) * 10;
+	
+	for (let i = 1; i <= 10; i++) {
+		let group = document.querySelector(`.gas_${i}`);
+		group && group.setAttribute('opacity', i <= n ? 1 : 0 );
+	}
+
+	document.querySelector('.earth-group').style.setProperty('--atmos-size', (1 - tIR) / 4);
+	document.querySelector('body').style.setProperty('--sun-strength', sliders.S.value / 100);
+	document.querySelector('.earth-group').style.setProperty('--albedo-effect', (sliders.A.value / 100));
 
 	// update thermometer
 	const tempRange = 400;
