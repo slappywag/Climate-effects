@@ -50,6 +50,9 @@ Object.keys(sliders).forEach(key => {
 
 const thermometerMercury = document.getElementById('mercury');
 
+const pattern = document.getElementById('stipple');
+const circles = document.querySelectorAll('circle');
+
 function updateScene() {
 
 	const tIR = Math.abs(sliders.tIR.value) * 0.01;
@@ -84,14 +87,12 @@ function updateScene() {
 	document.querySelector('.arrow-visible').style.setProperty('--arrow-scale', trapped);
 	document.querySelector('.arrow-visible').style.opacity = trapped > 0 ? 1 : 0;
 
-	// 
+	// stippling of greenhouse
+	const scale = tIR === 1 ? 0 : (tIR + 0.2) * 1.5;
+	const inverse = 1.1 - tIR;
+	pattern.setAttribute('patternTransform', `scale(${ scale })`)
+	circles.forEach( el => el.setAttribute( 'r', 5 * inverse ));
 
-	const n = (1 - tIR) * 10;
-	
-	for (let i = 1; i <= 10; i++) {
-		let group = document.querySelector(`.gas_${i}`);
-		group && group.setAttribute('opacity', i <= n ? 1 : 0 );
-	}
 
 	document.querySelector('.earth-group').style.setProperty('--atmos-size', (1 - tIR) / 4);
 	document.querySelector('body').style.setProperty('--sun-strength', sliders.S.value / 100);

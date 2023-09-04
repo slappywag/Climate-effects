@@ -269,7 +269,7 @@ ui-range-input {
 [class|='arrow'] .base {
 	height: calc(100% - 2vw);
 	width: 2vw;
-	transform: scaleX(var(--arrow-scale));
+	transform: scaleX(calc(var(--arrow-scale) + 0.15));
 	transform-origin: top center;
 	background-color: var(--fill-color);
 	border-radius: 5px 5px 0 0;
@@ -277,7 +277,7 @@ ui-range-input {
 [class|='arrow'] .head {
 	height: 3vw;
 	width: 3vw;
-	transform: scale(calc(1.25 + var(--arrow-scale) / 2 ));
+	transform: scale(calc(1.5 + var(--arrow-scale) / 2 ));
 	transform-origin: bottom center;
 	background-color: var(--fill-color);
 	clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
