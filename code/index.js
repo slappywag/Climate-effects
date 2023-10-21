@@ -1,5 +1,27 @@
 import './ui-slider';
 
+// elements
+const thermometerMercury = document.getElementById('mercury');
+const pattern = document.getElementById('stipple');
+const circles = document.querySelectorAll('circle');
+const arrow_S = document.querySelector('.arrow-S');
+const arrow_A = document.querySelector('.arrow-A');
+const arrow_AtmosOut = document.querySelector('.arrow-atmos-out');
+const arrow_GH_gases = document.querySelector('.arrow-gh-gases');
+const earthGroup = document.querySelector('.earth-group');
+const body = document.querySelector('body');
+const reflectivityGroup = document.getElementById('reflectivity-group');
+
+// select version
+let advanced = false;
+if (window.location.hash && window.location.hash === '#advanced') {
+	advanced = true;
+	// show slider
+	reflectivityGroup.classList.add('show');
+	// show arrow
+	arrow_A.classList.add('show');
+}
+
 // FS max
 const S_max = 1370;
 // Stefan-Boltzmann constant
@@ -44,14 +66,10 @@ const sliders = {
 };
 
 Object.keys(sliders).forEach(key => {
-	sliders[key].addEventListener('input', e => updateScene());
+	sliders[key].addEventListener('input', () => updateScene());
 });
 
-
-const thermometerMercury = document.getElementById('mercury');
-
-const pattern = document.getElementById('stipple');
-const circles = document.querySelectorAll('circle');
+// Update Scene
 
 function updateScene() {
 
@@ -65,38 +83,40 @@ function updateScene() {
 		tIR
 	);
 
+	// ARROWS
 
-	// arrows
-		
-	const emitted = Math.max(sliders.A.value / 100, 0.1);
-	const escaped = emitted * tIR;
-	const trapped = emitted - escaped;
+	// S is constant in both models
+	const S_scale = ((100 / 110) * (sliders.S.value)) / 100;
+	const A_scale = S_scale * (sliders.A.value / 100);
+	arrow_S.style.setProperty('--arrow-scale', S_scale);
+	arrow_S.style.opacity = sliders.S.value > 0 ? 1 : 0;
 
-	
-	document.querySelector('.arrow-flux').style.setProperty('--arrow-scale', sliders.S.value / 100);
-	document.querySelector('.arrow-flux').style.opacity = sliders.S.value > 0 ? 1 : 0;
-	
-	document.querySelector('.arrow-albedo').style.setProperty('--arrow-scale', emitted);
-	document.querySelector('.arrow-albedo').style.opacity = emitted > 0 ? 1 : 0;
+	// green house gases
+	arrow_GH_gases.style.setProperty('--arrow-scale', 1 - tIR);
+	arrow_GH_gases.style.opacity = 1 - tIR === 0 ? 0 : 1;
 
-	// light that makes it into space
-	document.querySelector('.arrow-infrared').style.setProperty('--arrow-scale', escaped);
-	document.querySelector('.arrow-infrared').style.opacity = escaped > 0 ? 1 : 0;
-
-	// trapped light by greenhouse gases
-	document.querySelector('.arrow-visible').style.setProperty('--arrow-scale', trapped);
-	document.querySelector('.arrow-visible').style.opacity = trapped > 0 ? 1 : 0;
-
+	// calculating arrow sizes
+	if (advanced) {
+		arrow_A.style.setProperty('--arrow-scale', A_scale);
+		arrow_A.style.opacity = A_scale > 0 ? 1 : 0;
+		// atmos out
+		// S - A
+		const out = S_scale * (1 - (sliders.A.value / 100))
+		arrow_AtmosOut.style.setProperty('--arrow-scale', out);
+		arrow_AtmosOut.style.opacity = out > 0 ? 1 : 0;
+	} else {
+		arrow_AtmosOut.style.setProperty('--arrow-scale', S_scale);
+		arrow_AtmosOut.style.opacity = sliders.S.value > 0 ? 1 : 0;
+	}
 	// stippling of greenhouse
 	const scale = tIR === 1 ? 0 : (tIR + 0.2) * 1.5;
 	const inverse = 1.1 - tIR;
 	pattern.setAttribute('patternTransform', `scale(${ scale })`)
 	circles.forEach( el => el.setAttribute( 'r', 5 * inverse ));
 
-
-	document.querySelector('.earth-group').style.setProperty('--atmos-size', (1 - tIR) / 4);
-	document.querySelector('body').style.setProperty('--sun-strength', sliders.S.value / 100);
-	document.querySelector('.earth-group').style.setProperty('--albedo-effect', (sliders.A.value / 100));
+	earthGroup.style.setProperty('--atmos-size', (1 - tIR) / 4);
+	earthGroup.style.setProperty('--albedo-effect', (sliders.A.value / 100));
+	body.style.setProperty('--sun-strength', sliders.S.value / 100);
 
 	// update thermometer
 	const tempRange = 400;

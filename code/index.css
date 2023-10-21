@@ -191,7 +191,7 @@ ui-range-input {
 	height: calc(400vw + 15vh + 30px);
 	margin-top: calc(-15vh - 30px - 1rem);
 	background-color: #200c43;
-	border: 1px dashed #351964;
+	border: 2px dashed #351964;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -219,6 +219,13 @@ ui-range-input {
 /* 
 	Sliders
 */
+
+#reflectivity-group {
+	display: none;
+}
+#reflectivity-group.show {
+	display: initial;
+}
 
 .slider-labels {
 	width: 100%;
@@ -293,24 +300,35 @@ ui-range-input {
 	margin-left: 5vw;
 }
 
-.arrow-flux {
-	margin-right: 5vw;
+.arrow-A,
+.arrow-S {
+	margin-right: 3rem;
 	height: 100%;
 	transform: rotate(-5deg);
 	--fill-color: hsl(calc(40 + 20 * var(--sun-strength)), 100%, calc(40% + 30% * var(--sun-strength)))
 }
 
-.arrow-albedo {
+.arrow-A {
+	transform: rotate(-185deg);
+	height: 98%;
+	margin-right: 5vw;
+	visibility: hidden;
+}
+.arrow-A.show {
+	visibility: visible;
+}
+
+.arrow-earth-out {
 	grid-area: 2 / 1;
 	rotate: x 180deg;
 }
 
-.arrow-infrared {
+.arrow-atmos-out {
 	align-self: flex-end;
 	rotate: x 180deg;
 	grid-area: 1 / 1;
 }
-.arrow-visible {
+.arrow-gh-gases {
 	grid-area: 2 / 2;
 }
 
