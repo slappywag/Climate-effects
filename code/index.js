@@ -8,9 +8,11 @@ const arrow_S = document.querySelector('.arrow-S');
 const arrow_A = document.querySelector('.arrow-A');
 const arrow_AtmosOut = document.querySelector('.arrow-atmos-out');
 const arrow_GH_gases = document.querySelector('.arrow-gh-gases');
+const arrow_earthOut = document.querySelector('.arrow-earth-out') 
 const earthGroup = document.querySelector('.earth-group');
 const body = document.querySelector('body');
 const reflectivityGroup = document.getElementById('reflectivity-group');
+
 
 // select version
 let advanced = false;
@@ -71,6 +73,8 @@ Object.keys(sliders).forEach(key => {
 
 // Update Scene
 
+const T_range = calc_T(S_max, 0, 1, 0).Kelvin - -273.1;
+
 function updateScene() {
 
 	const tIR = Math.abs(sliders.tIR.value) * 0.01;
@@ -85,6 +89,11 @@ function updateScene() {
 
 	// ARROWS
 
+	// earth arrow out
+	const arrowOutScale = (1 / T_range) * Temp.Kelvin;
+	arrow_earthOut.style.setProperty('--arrow-scale', arrowOutScale);
+	arrow_earthOut.style.opacity = arrowOutScale > 0 ? 1 : 0;
+
 	// S is constant in both models
 	const S_scale = ((100 / 110) * (sliders.S.value)) / 100;
 	const A_scale = S_scale * (sliders.A.value / 100);
@@ -92,8 +101,8 @@ function updateScene() {
 	arrow_S.style.opacity = sliders.S.value > 0 ? 1 : 0;
 
 	// green house gases
-	arrow_GH_gases.style.setProperty('--arrow-scale', 1 - tIR);
-	arrow_GH_gases.style.opacity = 1 - tIR === 0 ? 0 : 1;
+	arrow_GH_gases.style.setProperty('--arrow-scale', arrowOutScale * (1 - tIR));
+	arrow_GH_gases.style.opacity = 1 - tIR === 0 || arrowOutScale === 0 ? 0 : 1;
 
 	// calculating arrow sizes
 	if (advanced) {
@@ -109,11 +118,14 @@ function updateScene() {
 		arrow_AtmosOut.style.opacity = sliders.S.value > 0 ? 1 : 0;
 	}
 	// stippling of greenhouse
-	const scale = tIR === 1 ? 0 : (tIR + 0.2) * 1.5;
-	const inverse = 1.1 - tIR;
-	pattern.setAttribute('patternTransform', `scale(${ scale })`)
-	circles.forEach( el => el.setAttribute( 'r', 5 * inverse ));
+	
+	if (Math.abs(sliders.tIR.value % 10) === 0) {
+		const scale = tIR === 1 ? 0 : (tIR + 0.2) * 1.5;
+		pattern.setAttribute('patternTransform', `scale(${scale})`)
+		circles.forEach(el => el.setAttribute('r', 5 * (1 - tIR)));
+	}
 
+	// update scene
 	earthGroup.style.setProperty('--atmos-size', (1 - tIR) / 4);
 	earthGroup.style.setProperty('--albedo-effect', (sliders.A.value / 100));
 	body.style.setProperty('--sun-strength', sliders.S.value / 100);
