@@ -131,8 +131,7 @@ function updateScene() {
 	body.style.setProperty('--sun-strength', sliders.S.value / 100);
 
 	// update thermometer
-	const tempRange = 400;
-	const yRange = (110 * ((1 / tempRange) * +Temp.Kelvin));
+	const yRange = (110 * ((1 / T_range) * Temp.Kelvin));
 	thermometerMercury.style.transform = `translate(0, ${yRange * -1}px)`
 	surfaceTemp.textContent = Temp.Celius + '°C';
 }
