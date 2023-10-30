@@ -117,13 +117,12 @@ function updateScene() {
 		arrow_AtmosOut.style.setProperty('--arrow-scale', S_scale);
 		arrow_AtmosOut.style.opacity = sliders.S.value > 0 ? 1 : 0;
 	}
-	// stippling of greenhouse
 	
-	if (Math.abs(sliders.tIR.value % 10) === 0) {
-		const scale = tIR === 1 ? 0 : (tIR + 0.2) * 1.5;
-		pattern.setAttribute('patternTransform', `scale(${scale})`)
-		circles.forEach(el => el.setAttribute('r', 5 * (1 - tIR)));
-	}
+	// stippling of greenhouse
+	const dotInt = parseInt(Math.abs(tIR * 10)) / 10;
+	const scale = dotInt === 1 ? 0 : (dotInt + 0.2) * 1.5;
+	pattern.setAttribute('patternTransform', `scale(${scale})`)
+	circles.forEach(el => el.setAttribute('r', 5 * (1 - dotInt)));
 
 	// update scene
 	earthGroup.style.setProperty('--atmos-size', (1 - tIR) / 4);

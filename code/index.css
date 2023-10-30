@@ -71,16 +71,17 @@ article {
 }
 
 .scene {
+	position: relative;
 	margin: 20px;
 	overflow: hidden;
 	width: calc(100% - 40px);
 	height: calc(100% - 40px);
+	min-height: 600px;
 	border-radius: 40px;
 	border: 10px solid #623591;
 	background: linear-gradient(to bottom, #0e0224, #1e0d3e);
-
 	display: grid;
-	grid-template-rows: 10vh 1fr 30vh;
+	grid-template-rows: 10% 1fr 30%;
 	gap: 30px;
 }
 
