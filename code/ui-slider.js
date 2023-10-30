@@ -338,14 +338,18 @@ class UI_RANGE extends HTMLElement {
 	}
 
 	attributeChangedCallback(name, oldValue, newValue) {
-		if (newValue !== oldValue) {
-			this.range[name] = newValue;
-			this.updateRange();
+		if (name === 'textvalue') {
+			this.input.setAttribute('aria-textvalue', newValue);
+		} else {
+			if (newValue !== oldValue) {
+				this.range[name] = newValue;
+				this.updateRange();
+			}
 		}
 	}
 
 	static get observedAttributes() {
-		return ['min', 'max', 'step', 'value'];
+		return ['min', 'max', 'step', 'value', 'textvalue'];
 	}
 
 	get disabled() {

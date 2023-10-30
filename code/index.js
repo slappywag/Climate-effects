@@ -49,7 +49,7 @@ const defaults = {
 	S: 100,
 	A: 30,
 	tVIS: 80,
-	tIR: -10
+	tIR: 0.9
 };
 resetButton.addEventListener('click', () => {
 	Object.keys(sliders).forEach(key => {
@@ -67,8 +67,35 @@ const sliders = {
 	tIR: document.getElementById('infrared-transimittance')
 };
 
+function updateAriaTextValue(key) {
+	const value = +sliders[key].value;
+	if (key === 'S' || key === 'A') {
+		sliders[key].setAttribute('textvalue', value + '%');
+	} else if (key === 'tIR') {
+		let text;
+		if (value === 0) {
+			text = 'none';
+		} else if (value < 0.25) {
+			text = 'minimal'
+		} else if (value < 0.5) {
+			text = 'low'
+		} else if (value < 0.775) {
+			text = 'moderate'
+		} else if (value < 0.99) {
+			text = 'high'
+		} else if (value === 1) {
+			text = 'Lots'
+		}
+		sliders[key].setAttribute('textvalue', text);
+	}
+}
+
 Object.keys(sliders).forEach(key => {
-	sliders[key].addEventListener('input', () => updateScene());
+	updateAriaTextValue(key);
+	sliders[key].addEventListener('input', event => {
+		updateAriaTextValue(key);
+		updateScene();
+	});
 });
 
 // Update Scene
@@ -77,7 +104,7 @@ const T_range = calc_T(S_max, 0, 1, 0).Kelvin - -273.1;
 
 function updateScene() {
 
-	const tIR = Math.abs(sliders.tIR.value) * 0.01;
+	const tIR = 1 - +sliders.tIR.value;
 
 	// update temp
 	const Temp = calc_T(
@@ -92,37 +119,37 @@ function updateScene() {
 	// earth arrow out
 	const arrowOutScale = (1 / T_range) * Temp.Kelvin;
 	arrow_earthOut.style.setProperty('--arrow-scale', arrowOutScale);
-	arrow_earthOut.style.opacity = arrowOutScale > 0 ? 1 : 0;
+	arrow_earthOut.classList.toggle('hide', arrowOutScale === 0)
 
 	// S is constant in both models
 	const S_scale = ((100 / 110) * (sliders.S.value)) / 100;
 	const A_scale = S_scale * (sliders.A.value / 100);
 	arrow_S.style.setProperty('--arrow-scale', S_scale);
-	arrow_S.style.opacity = sliders.S.value > 0 ? 1 : 0;
+	arrow_S.classList.toggle('hide',  +sliders.S.value === 0)
 
 	// green house gases
 	arrow_GH_gases.style.setProperty('--arrow-scale', arrowOutScale * (1 - tIR));
-	arrow_GH_gases.style.opacity = 1 - tIR === 0 || arrowOutScale === 0 ? 0 : 1;
+	arrow_GH_gases.classList.toggle('hide',  1 - tIR === 0 || arrowOutScale === 0);
 
 	// calculating arrow sizes
 	if (advanced) {
 		arrow_A.style.setProperty('--arrow-scale', A_scale);
-		arrow_A.style.opacity = A_scale > 0 ? 1 : 0;
-		// atmos out
-		// S - A
+		arrow_A.classList.toggle('hide',  A_scale === 0)
+		// atmos out (S - A)
 		const out = S_scale * (1 - (sliders.A.value / 100))
 		arrow_AtmosOut.style.setProperty('--arrow-scale', out);
-		arrow_AtmosOut.style.opacity = out > 0 ? 1 : 0;
+		arrow_AtmosOut.classList.toggle('hide',  out === 0)
 	} else {
+		// atmos out
 		arrow_AtmosOut.style.setProperty('--arrow-scale', S_scale);
-		arrow_AtmosOut.style.opacity = sliders.S.value > 0 ? 1 : 0;
+		arrow_AtmosOut.classList.toggle('hide',  +sliders.S.value === 0)
 	}
 	
 	// stippling of greenhouse
-	const dotInt = parseInt(Math.abs(tIR * 10)) / 10;
-	const scale = dotInt === 1 ? 0 : (dotInt + 0.2) * 1.5;
-	pattern.setAttribute('patternTransform', `scale(${scale})`)
-	circles.forEach(el => el.setAttribute('r', 5 * (1 - dotInt)));
+	const dotInt = (parseInt(Math.abs(sliders.tIR.value * 10)) / 10);
+	const dotScale = dotInt === 0 ? 0 : (1.2 - dotInt) * 1.5;
+	pattern.setAttribute('patternTransform', `scale(${dotScale})`)
+	circles.forEach(el => el.setAttribute('r', 5 * dotInt));
 
 	// update scene
 	earthGroup.style.setProperty('--atmos-size', (1 - tIR) / 4);

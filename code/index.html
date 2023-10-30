@@ -15,28 +15,19 @@
 	<div class="sun-dialog">
 		<h2>Energy from the Sun</h2>
 		<p>
-			The energy from the Sun varies over time due to activity on the Sun's surface. Also, slight shifts in the tilt of the
-			Earth and the shape of its orbit around the Sun affects the amount of the Sun's energy that reaches the surface of the
-			Earth. Within decades, the energy could change by 1%, but over thousands of years the variations could be larger.
-			What does the model predict the Earth's average temperature would be if there was no energy from the Sun (0%)?
+			The energy from the Sun varies over time due to activity on the Sun's surface. Also, slight shifts in the tilt of the Earth and the shape of its orbit around the Sun affects the amount of the Sun's energy that reaches the surface of the Earth. Within decades, the energy could change by 1%, but over thousands of years the variations could be larger. What does the model predict the Earth's average temperature would be if there was no energy from the Sun (0%)?
 		</p>
 	</div>
 	<div class="greenhouse-dialog">
 		<h2>Greenhouse gases</h2>
 		<p>
-			Energy from the Sun warms the Earth. As the Earth's temperature increases, more heat is radiated back into space
-			(represented by the orange arrows on the model). Greenhouse gases (like carbon dioxide and methane) trap heat
-			radiated from the Earth. Some of this heat is directed back to the Earth’s surface and as a result the surface
-			temperature of the Earth increases. What does the model predict the Earth's temperature would be if there were no Greenhouse gases?
+			Energy from the Sun warms the Earth. As the Earth's temperature increases, more heat is radiated back into space (represented by the orange arrows on the model). Greenhouse gases (like carbon dioxide and methane) trap heat radiated from the Earth. Some of this heat is directed back to the Earth’s surface and as a result the surface temperature of the Earth increases. What does the model predict the Earth's temperature would be if there were no Greenhouse gases?
 		</p>
 	</div>
 	<div class="reflectivity-dialog">
 		<h2>Earth's reflectivity</h2>
 		<p>	
-			Some of the energy from the Sun does not reach the Earth's surface and warm it up but is reflected back into space.
-			Bright white surfaces like snow, ice and clouds are good at reflecting sunlight. Dark surfaces like the ocean reflect
-			less sunlight and so more energy is absorbed by the Earth and warms it up.
-			What does the model predict will happen to the Earth's temperature if reflectivity decreases?
+			Some of the energy from the Sun does not reach the Earth's surface and warm it up but is reflected back into space. Bright white surfaces like snow, ice and clouds are good at reflecting sunlight. Dark surfaces like the ocean reflect less sunlight and so more energy is absorbed by the Earth and warms it up. What does the model predict will happen to the Earth's temperature if reflectivity decreases?
 		</p>
 	</div>
 	<form method="dialog">
@@ -45,68 +36,101 @@
 </dialog>
 	
 <article class="app">
-	<div class="scene">
-
-		<div class="sun-group">
-			<div class="sun"></div>
-		</div>
-
-		<div class="arrows">
-			<div class="arrow-S">
-				<div class="base"></div>
-				<div class="head"></div>
+	<h1 class="sr-only">Climate model</h1>
+	<div class="scene" >
+		<div class="img" role="img" aria-labelledby="scene-label" aria-describedby="scene-description">
+			<p id="scene-label" class="sr-only">
+				Dynamic model of the Earth's climate
+			</p>
+			<div id="scene-description" class="sr-only">
+				<p>
+					A diagram showing the sun, the earth and the earths atmosphere. arrows dynamically update based on the values from the inputs.
+					The arrows show the following:
+				</p>
+				<ul>
+					<li>
+						Energy from the sun.
+						Pointing from the sun to the earths surface, this arrow depicts the Energy from the sun. This scales solely on the 'energy from the sun' input, which ranges from 0% (where the arrow is hidden) to 110% where the arrow is at it's max size.
+					</li>
+					<li>
+						Earths reflectivty.
+						On the version of this model where 'Earths reflectivty' is shown, there is an adjacent arrow to the Energy from the sun arrow, which points from the earths surface to the sun, and depicts the amount of energy relected from the earths surface. this ranges from 0% (where the arrow is hidden) to 100% where the arrow is at is max size.
+					</li>
+					<li>
+						Energy radiated from the earth.
+						This points from the earths surface to the edge of the atmosphere. This scales based on the overall earths temperature, and is hidden at absolute zero (-271.1 degrees celcius) and is at it's max size when there is 0% earths reflectivity, 110% energy from the sun and 'lots' of greenhouse gases.</li>
+					<li>
+						Energy that escapes the atmosphere.
+						This arrow points from the earths atmosphere out into space. This arrow is a product of the Energy from sun minus the Earths reflectivity. It is hidden when there is 0 energy from the sun or when there is 100% reflectivity.
+					</li>
+					<li>
+						Greenhouse gases.
+						This arrow points from the earths atmosphere back towards earth. It scales based on the the amount of greenhouse gases in the atmosphere there are, it is hidden where there is no greenhouse gases and it's max size when there are lots of greenhouse gases. It is a product of the energy radiated from the earths surface, so if this is at 0, then this arrow is also hidden.
+					</li>
+				</ul>
 			</div>
-			<div class="arrow-A">
-				<div class="base"></div>
-				<div class="head"></div>
+			
+			<div class="sun-group">
+				<div class="sun"></div>
 			</div>
-		
-			<div class="arrow-grid">
-				<div class="arrow-earth-out">
+			
+			<div class="arrows">
+				<div class="arrow-S">
 					<div class="base"></div>
 					<div class="head"></div>
 				</div>
-				<div class="arrow-atmos-out">
+				<div class="arrow-A">
 					<div class="base"></div>
 					<div class="head"></div>
 				</div>
-				<div class="arrow-gh-gases">
-					<div class="base"></div>
-					<div class="head"></div>
+			
+				<div class="arrow-grid">
+					<div class="arrow-earth-out">
+						<div class="base"></div>
+						<div class="head"></div>
+					</div>
+					<div class="arrow-atmos-out">
+						<div class="base"></div>
+						<div class="head"></div>
+					</div>
+					<div class="arrow-gh-gases">
+						<div class="base"></div>
+						<div class="head"></div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="earth-group">
+				<div class="atmosphere">
+					<div class="greenhouse">
+						<svg role="presentation" id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'>
+							<defs>
+								<pattern id='stipple' patternUnits='userSpaceOnUse' width='40' height='40'>
+									<circle cx="20" cy='20' r='5'></circle>
+									<circle cx="0" cy='0' r='5'></circle>
+									<circle cx="40" cy='0' r='5'></circle>
+									<circle cx="0" cy='40' r='5'></circle>
+									<circle cx="40" cy='40' r='5'></circle>
+								</pattern>
+							</defs>
+							<rect id="stipple-path" width='100%' height='100%' fill='url(#stipple)' />
+						</svg>
+					</div>
+				</div>
+				<div class="earth">
+					<img src="./images/earth_vector_3.svg" alt="">
 				</div>
 			</div>
 		</div>
 
-		<div class="earth-group">
-			<div class="atmosphere">
-				<div class="greenhouse">
-					<svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'>
-						<defs>
-							<pattern id='stipple' patternUnits='userSpaceOnUse' width='40' height='40' >
-								<circle cx="20" cy='20' r='5'></circle>
-								<circle cx="0" cy='0' r='5'></circle>
-								<circle cx="40" cy='0' r='5'></circle>
-								<circle cx="0" cy='40' r='5'></circle>
-								<circle cx="40" cy='40' r='5'></circle>
-							</pattern>
-						</defs>
-						<rect id="stipple-path" width='100%' height='100%' fill='url(#stipple)' />
-					</svg>
-				</div>
-			</div>
-			<div class="earth">
-				<img src="./images/earth_vector_3.svg" alt="">
-			</div>
-		</div>
-		
-		<!-- arrows -->
+		<!-- temp / thermometer group -->
 		
 		<div class="surface-temp">
 			<svg class="thermometer-svg" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 85 160" role="img"
 				aria-labelledby="thermometer_title thermometer_desc">
 		
 				<title id="thermometer_title">Thermometer</title>
-				<desc id="thermometer_desc"></desc>
+				<desc id="thermometer_desc">Dynamically updates based on the earths average surface temperature</desc>
 		
 				<defs>
 					<mask id="mercury-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="160">
@@ -123,10 +147,10 @@
 					<rect id="mercury" fill="#E74D3C" y="122" width="200" height="160" />
 				</g>
 			</svg>
-			<p>Earth’s average surface temperature: <br><span id="surfaceTemp"></span></p>
+			<p aria-live="assertive" aria-atomic="true">Earth’s average <br aria-hidden="true"> surface <br aria-hidden="true"> temperature: <br aria-hidden="true"><span id="surfaceTemp"></span></p>
 		</div>
 	</div>
-	<div class="sliders-wrap">		
+	<div class="sliders-wrap">
 		<div>
 			<ui-range-input
 				show-output=false
@@ -167,10 +191,10 @@
 			<ui-range-input
 				show-output=false
 				id="infrared-transimittance"
-				min="-100"
-				max="0"
-				step="1"
-				value="-10"
+				min="0"
+				max="1"
+				step="0.01"
+				value="0.9"
 				output-suffix="%"
 				label="Greenhouse gases">
 			</ui-range-input>
