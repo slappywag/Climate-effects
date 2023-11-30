@@ -153,7 +153,18 @@ function updateScene() {
 
 	// update scene
 	earthGroup.style.setProperty('--atmos-size', (1 - tIR) / 4);
-	earthGroup.style.setProperty('--albedo-effect', (sliders.A.value / 100));
+	
+	let albedoBrightness, albedoOpacity;
+	
+	if (sliders.A.value <= 30) {
+		albedoBrightness = (1 / 30) * sliders.A.value;
+		albedoOpacity = 1;
+	} else {
+		albedoBrightness = 1 + (1 / 70) * (sliders.A.value - 30);
+		albedoOpacity = 1 - (1 / 70) * (sliders.A.value - 30);
+	}
+	earthGroup.style.setProperty('--albedo-brightness', albedoBrightness);
+	earthGroup.style.setProperty('--albedo-opacity', albedoOpacity);
 	body.style.setProperty('--sun-strength', sliders.S.value / 100);
 
 	// update thermometer

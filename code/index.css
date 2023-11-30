@@ -194,7 +194,8 @@ ui-range-input {
 	border-radius: 50%;
 	overflow: hidden;
 	background-blend-mode: lighten;
-	opacity: calc( 1.1 - var(--albedo-effect));
+	opacity: var(--albedo-opacity);
+	filter: brightness(var(--albedo-brightness));
 }
 
 
